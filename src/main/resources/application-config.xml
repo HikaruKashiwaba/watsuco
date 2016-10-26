@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/tx
+		http://www.springframework.org/schema/tx/spring-tx-3.2.xsd">
+
+	<!-- Enable autowire. -->
+	<context:component-scan base-package="jp.co.ugatria.atsuco"/>
+
+	<aop:aspectj-autoproxy />
+
+	<!-- jdbc.propertiesを認識させる propertyConfigurer -->
+	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:/jdbc.properties</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- Data source -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="${jdbc.driverClassName}"/>
+		<property name="url" value="${jdbc.url}"/>
+		<property name="username" value="${jdbc.username}"/>
+		<property name="password" value="${jdbc.password}"/>
+		<property name="maxActive" value="${jdbc.maxPoolSize}"/>
+	</bean>
+
+	<!-- トランザクションマネージャ -->
+	<tx:annotation-driven/>
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+
+	<!-- MyBatisの設定 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="configLocation" value="classpath:/mybatis-config.xml"/>
+	</bean>
+
+	<!-- システム設定プロパティ -->
+	<bean id="systemSettings" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+		<property name="locations">
+		    <list>
+		        <value>classpath:application.properties</value>
+		    </list>
+		</property>
+	</bean>
+
+	<!-- メッセージプロパティ -->
+	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basename" value="classpath:/message"/>
+	</bean>
+
+	<!-- セッション情報 -->
+	<bean id="sessionInfo" class="jp.co.ugatria.atsuco.dto.session.SessionInfo" scope="session">
+		<aop:scoped-proxy/>
+	</bean>
+
+	<!-- Daoの定義 -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value= "jp.co.ugatria.atsuco.dao" />
+	</bean>
+</beans>

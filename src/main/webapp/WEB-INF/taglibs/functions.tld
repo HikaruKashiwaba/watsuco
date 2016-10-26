@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+	version="2.0">
+
+	<tlib-version>1.1</tlib-version>
+	<short-name>fn</short-name>
+	<uri>/jsp/tag/functions</uri>
+
+	<function>
+		<name>contains</name>
+		<function-class>jp.co.ugatria.care.tag.Functions</function-class>
+		<function-signature>
+			boolean contains(java.lang.Object, java.lang.Object)
+		</function-signature>
+	</function>
+
+	<function>
+		<name>formatNumber</name>
+		<function-class>jp.co.ugatria.care.tag.Functions</function-class>
+		<function-signature>
+			java.lang.String formatNumber(java.lang.String, java.lang.String)
+		</function-signature>
+	</function>
+
+	<function>
+		<name>hasAuth</name>
+		<function-class>jp.co.ugatria.care.tag.Functions</function-class>
+		<function-signature>
+			boolean hasAuth(jp.co.ugatria.care.dto.session.LoginInfo, java.lang.String)
+		</function-signature>
+	</function>
+
+	<function>
+		<name>formatDate</name>
+		<function-class>jp.co.ugatria.care.tag.Functions</function-class>
+		<function-signature>
+			java.lang.String formatDate(java.util.Date)
+		</function-signature>
+	</function>
+
+	<function>
+		<name>formatSpan</name>
+		<function-class>jp.co.ugatria.care.tag.Functions</function-class>
+		<function-signature>
+			java.lang.String formatSpan(java.util.Date, java.util.Date)
+		</function-signature>
+	</function>
+
+	<function>
+		<name>outLineBreak</name>
+		<function-class>jp.co.ugatria.care.tag.Functions</function-class>
+		<function-signature>
+			java.lang.String outLineBreak(java.lang.Object)
+		</function-signature>
+	</function>
+
+	<function>
+		<name>beforeDayAfterMonth</name>
+		<function-class>jp.co.ugatria.care.tag.Functions</function-class>
+		<function-signature>
+			java.util.Date beforeDayAfterMonth(java.util.Date, int)
+		</function-signature>
+	</function>
+
+</taglib>
