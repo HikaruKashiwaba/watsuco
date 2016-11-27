@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.co.ugatria.atsuco.dao.UserDao">
+
+	<sql id="allColumns">
+		a.user_id as userId,
+		a.email,
+		a.password,
+		a.user_name as userName,
+		a.authority,
+		a.auth_ctrl as authCtrl,
+		a.icon_file as iconFile,
+		a.last_login_date as lastLoginDate,
+		a.create_date as createDate,
+		a.create_user_id as createUserId,
+		a.update_date as updateDate,
+		a.update_user_id as updateUserId,
+		a.del_flg as delFlg
+	</sql>
+
+	<select id="findByPrimary" resultType="User">
+		select
+			<include refid="allColumns"/>
+		from
+			user a
+		 where
+		 	a.user_id = #{userId}
+	</select>
+
+	<select id="findByLoginId" resultType="User">
+		select
+			<include refid="allColumns"/>
+		from
+			user a
+		 where
+		 	a.email = #{email}
+	</select>
+
+	<insert id="insert" parameterType="User">
+		<selectKey keyProperty="userId" resultType="long" order="AFTER">
+			select last_insert_id() as userId
+		</selectKey>
+
+		insert into user (
+			email,
+			password,
+			user_name,
+			authority,
+			auth_ctrl,
+			icon_file,
+			last_login_date,
+			create_date,
+			create_user_id,
+			update_date,
+			update_user_id,
+			del_flg
+		)
+		values (
+			#{email},
+			#{password},
+			#{userName},
+			'1',
+			'0',
+			null,
+			null,
+			current_timestamp,
+			#{createUserId},
+			current_timestamp,
+			#{updateUserId},
+			'0'
+		)
+	</insert>
+
+	<update id="update" parameterType="User">
+		update user
+		set
+			email = #{email},
+			password = #{password},
+			user_name = #{userName},
+			update_date = #{updateDate},
+			update_user_id = #{updateUserId}
+		where
+			user_id = #{userId}
+	</update>
+
+	<update id="updateLastLoginDate" parameterType="User">
+		update user
+		set
+			last_login_date = current_timestamp,
+			update_date = current_timestamp,
+			update_user_id = #{userId}
+		where
+			user_id = #{userId}
+	</update>
+
+	<update id="delete">
+		update user
+		set
+			del_flg = '1'
+		where
+			user_id = #{userId}
+	</update>
+
+</mapper>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.co.ugatria.atsuco.dao.TaskCommentDao">
+
+	<sql id="allColumns">
+		a.create_date as createDate,
+		a.create_user_id as createUserId,
+		a.update_date as updateDate,
+		a.update_user_id as updateUserId,
+		a.del_flg as delFlg
+	</sql>
+
+	<select id="findByPrimary" resultType="TaskComment">
+	</select>
+
+	<insert id="insert" parameterType="TaskComment">
+		<selectKey keyProperty="commentNo" resultType="long" order="BEFORE">
+			select ifnull(max(comment_no), 0) + 1  as commentNo from task_comment where task_id = #{taskId}
+		</selectKey>
+
+		insert into task_comment (
+			create_date,
+			create_user_id,
+			update_date,
+			update_user_id,
+			del_flg
+		)
+		values (
+			current_timestamp,
+			#{createUserId},
+			current_timestamp,
+			#{updateUserId},
+			'0'
+		)
+	</insert>
+
+	<update id="update" parameterType="TaskComment">
+		update task_comment
+		set
+			update_date = #{updateDate},
+			update_user_id = #{updateUserId}
+	</update>
+
+	<update id="delete">
+		update task_comment
+		set
+			del_flg = '1'
+		where
+			task_id = #{taskId} and
+			comment_no = #{commentNo}
+	</update>
+
+</mapper>

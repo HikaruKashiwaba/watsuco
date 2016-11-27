@@ -9,6 +9,18 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	</settings>
 	<typeAliases>
 		<!-- entity -->
+		<typeAlias alias="Company" type="jp.co.ugatria.atsuco.entity.Company" />
+		<typeAlias alias="ContractHistory" type="jp.co.ugatria.atsuco.entity.ContractHistory" />
+		<typeAlias alias="DailyReport" type="jp.co.ugatria.atsuco.entity.DailyReport" />
+		<typeAlias alias="Issue" type="jp.co.ugatria.atsuco.entity.Issue" />
+		<typeAlias alias="IssueComment" type="jp.co.ugatria.atsuco.entity.IssueComment" />
+		<typeAlias alias="Project" type="jp.co.ugatria.atsuco.entity.Project" />
+		<typeAlias alias="ProjectRank" type="jp.co.ugatria.atsuco.entity.ProjectRank" />
+		<typeAlias alias="ProjectTeam" type="jp.co.ugatria.atsuco.entity.ProjectTeam" />
+		<typeAlias alias="Task" type="jp.co.ugatria.atsuco.entity.Task" />
+		<typeAlias alias="TaskCategory" type="jp.co.ugatria.atsuco.entity.TaskCategory" />
+		<typeAlias alias="TaskComment" type="jp.co.ugatria.atsuco.entity.TaskComment" />
+		<typeAlias alias="User" type="jp.co.ugatria.atsuco.entity.User" />
 
 		<!-- condition -->
 

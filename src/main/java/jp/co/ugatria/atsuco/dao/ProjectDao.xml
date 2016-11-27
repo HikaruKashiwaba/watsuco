@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.co.ugatria.atsuco.dao.ProjectDao">
+
+	<sql id="allColumns">
+		a.company_id as companyId,
+		a.project_id as projectId,
+		a.project_name as projectName,
+		a.summary as summary,
+		a.start_date as startDate,
+		a.end_date as endDate,
+		a.create_date as createDate,
+		a.create_user_id as createUserId,
+		a.update_date as updateDate,
+		a.update_user_id as updateUserId,
+		a.del_flg as delFlg
+	</sql>
+
+	<select id="findByPrimary" resultType="Project">
+		select
+			<include refid="allColumns"/>
+		from
+			project a
+		where
+			a.project_id = #{projectId} and
+			a.del_flg = '0'
+	</select>
+
+	<insert id="insert" parameterType="Project">
+		<selectKey keyProperty="projectId" resultType="long" order="AFTER">
+			select last_insert_id() as id
+		</selectKey>
+
+		insert into project (
+			company_id,
+			project_name,
+			summary,
+			start_date,
+			end_date,
+			create_date,
+			create_user_id,
+			update_date,
+			update_user_id,
+			del_flg
+		)
+		values (
+			#{companyId},
+			#{projectName},
+			#{summary},
+			#{startDate},
+			#{endDate},
+			current_timestamp,
+			#{createUserId},
+			current_timestamp,
+			#{updateUserId},
+			'0'
+		)
+	</insert>
+
+	<update id="update" parameterType="Project">
+		update project
+		set
+			project_name = #{projectName},
+			summary = #{summary},
+			start_date = #{startDate},
+			end_date = #{endDate},
+			update_date = #{updateDate},
+			update_user_id = #{updateUserId}
+		where
+			project_id = #{projectId}
+	</update>
+
+	<delete id="delete">
+		update project
+		set
+			del_flg = '1'
+		where
+			project_id = #{projectId}
+	</delete>
+
+</mapper>

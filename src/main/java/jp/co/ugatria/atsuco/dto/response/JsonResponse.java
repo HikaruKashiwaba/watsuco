@@ -1,4 +1,4 @@
-package jp.co.ugatria.atsuco.dto;
+package jp.co.ugatria.atsuco.dto.response;
 
 public class JsonResponse {
 

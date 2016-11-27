@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.co.ugatria.atsuco.dao.IssueDao">
+
+	<sql id="allColumns">
+		a.company_id as #{companyid},
+		a.project_id as #{projectid},
+		a.task_id as #{taskid},
+		a.issue_id as #{issueid},
+		a.title as #{title},
+		a.contents as #{contents},
+		a.user_id as #{userid},
+		a.create_date as createDate,
+		a.create_user_id as createUserId,
+		a.update_date as updateDate,
+		a.update_user_id as updateUserId,
+		a.del_flg as delFlg
+	</sql>
+
+	<select id="findByPrimary" resultType="Issue">
+		select
+			<include refid="allColumns"/>
+		from
+			issue a
+		where
+			a.issue_id = #{issueid} and
+			a.del_flg = '0'
+	</select>
+
+	<insert id="insert" parameterType="Issue">
+		<selectKey keyProperty="issueId" resultType="long" order="AFTER">
+			select last_insert_id() as id
+		</selectKey>
+
+		insert into issue (
+			company_id,
+			project_id,
+			task_id,
+			issue_id,
+			title,
+			contents,
+			user_id,
+			create_date,
+			create_user_id,
+			update_date,
+			update_user_id,
+			del_flg
+		)
+		values (
+			#{companyid},
+			#{projectid},
+			#{taskid},
+			#{issueid},
+			#{title},
+			#{contents},
+			#{userid},
+			current_timestamp,
+			#{createUserId},
+			current_timestamp,
+			#{updateUserId},
+			'0'
+		)
+	</insert>
+
+	<update id="update" parameterType="Issue">
+		update issue
+		set
+			title as #{title},
+			contents as #{contents},
+			update_date = #{updateDate},
+			update_user_id = #{updateUserId}
+		where
+			issue_id = #{issueid}
+	</update>
+
+	<delete id="delete">
+		update issue
+		set
+			del_flg = '1'
+		where
+			issue_id = #{issueid}
+	</delete>
+
+</mapper>

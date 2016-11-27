@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.co.ugatria.atsuco.dao.DailyReportDao">
+
+	<sql id="allColumns">
+		a.company_id as companyId,
+		a.project_id as projectId,
+		a.user_id as userId,
+		a.report_date as reportDate,
+		a.not_start_cnt as notStartCnt,
+		a.in_work_cnt as inWorkCnt,
+		a.finish_cnt as finishCnt,
+		a.total_cnt as totalCnt,
+		a.start_delayed_cnt as startDelayedCnt,
+		a.complete_delayed_cnt as completeDelayedCnt,
+		a.create_date as createDate,
+		a.create_user_id as createUserId,
+		a.update_date as updateDate,
+		a.update_user_id as updateUserId,
+		a.del_flg as delFlg
+	</sql>
+
+	<select id="findByPrimary" resultType="DailyReport">
+		select
+			<include refid="allColumns"/>
+		from
+			daily_report a
+		where
+			a.project_id = #{projectId} and
+			a.user_id = #{userId} and
+			a.report_date = #{reportDate} and
+			a.del_flg = '0'
+	</select>
+
+	<insert id="insert" parameterType="DailyReport">
+		insert into daily_report (
+			company_id,
+			project_id,
+			user_id,
+			report_date,
+			not_start_cnt,
+			in_work_cnt,
+			finish_cnt,
+			total_cnt,
+			start_delayed_cnt,
+			complete_delayed_cnt,
+			create_date,
+			create_user_id,
+			update_date,
+			update_user_id,
+			del_flg
+		)
+		values (
+			#{companyId},
+			#{projectId},
+			#{userId},
+			#{reportDate},
+			#{notStartCnt},
+			#{inWorkCnt},
+			#{finishCnt},
+			#{totalCnt},
+			#{startDelayedCnt},
+			#{completeDelayedCnt},
+			current_timestamp,
+			#{createUserId},
+			current_timestamp,
+			#{updateUserId},
+			'0'
+		)
+	</insert>
+
+	<update id="update" parameterType="DailyReport">
+		update daily_report
+		set
+			company_id = #{companyId},
+			project_id = #{projectId},
+			user_id = #{userId},
+			report_date = #{reportDate},
+			not_start_cnt = #{notStartCnt},
+			in_work_cnt = #{inWorkCnt},
+			finish_cnt = #{finishCnt},
+			total_cnt = #{totalCnt},
+			start_delayed_cnt = #{startDelayedCnt},
+			complete_delayed_cnt = #{completeDelayedCnt},
+			update_date = #{updateDate},
+			update_user_id = #{updateUserId}
+		where
+			a.project_id = #{projectId} and
+			a.user_id = #{userId} and
+			a.report_date = #{reportDate}
+	</update>
+
+	<delete id="delete">
+		update daily_report
+		set
+			del_flg = '1'
+		where
+			a.project_id = #{projectId} and
+			a.user_id = #{userId} and
+			a.report_date = #{reportDate}
+	</delete>
+</mapper>

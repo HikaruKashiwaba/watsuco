@@ -1,0 +1,48 @@
+.color-not-asigned {
+	background-color: #eeeeee;
+}
+
+.color-not-start {
+	background-color: #ffdddd;
+}
+
+.color-in-work {
+	background-color: #ccff99;
+}
+
+.color-finish {
+	background-color: #99ccff;
+}
+
+.no-pad {
+	padding-right: 0px;
+	padding-left: 0px;
+}
+.bb-gray {
+	border-bottom: solid 1px #cccccc;
+}
+
+.mh-600 {
+	height: 600px;
+	min-height: 600px;
+}
+.h-100p {
+	height: 100%;
+}
+.w-100p {
+	width:100%;
+}
+img.sticky {
+	width: 42px;
+	height: 38px;
+	margin: 5px;
+	cursor: pointer;
+}
+
+.mb05 {
+	margin-bottom: 5px;
+}
+
+.bottom-fixed {
+	position:absolute;
+	bottom:0; }

@@ -28,7 +28,7 @@
   </filter-mapping>
   <filter>
     <filter-name>Access Log</filter-name>
-    <filter-class>jp.co.ugatria.care.filter.AccessLogFilter</filter-class>
+    <filter-class>jp.co.ugatria.atsuco.filter.AccessLogFilter</filter-class>
   </filter>
   <filter-mapping>
     <filter-name>Access Log</filter-name>
@@ -39,8 +39,7 @@
     <servlet-class>com.sun.jersey.spi.spring.container.servlet.SpringServlet</servlet-class>
     <init-param>
       <param-name>com.sun.jersey.config.property.packages</param-name>
-      <!-- <param-value>jp.co.ugatria.care.action.*;jp.co.ugatria.care.condition.*;jp.co.ugatria.care.form.*;jp.co.ugatria.care.form.key.*</param-value> -->
-      <param-value>jp.co.ugatria.care.action.*</param-value>
+      <param-value>jp.co.ugatria.atsuco.action.*;jp.co.ugatria.atsuco.condition.*;jp.co.ugatria.atsuco.form.*</param-value>
     </init-param>
     <init-param>
       <param-name>com.sun.jersey.config.property.JSPTemplatesBasePath</param-name>

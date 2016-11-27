@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.co.ugatria.atsuco.dao.ContractHistoryDao">
+
+	<sql id="allColumns">
+		a.company_id as companyId,
+		a.seq_no as seqNo,
+		a.contract_start_date as contractStartDate,
+		a.user_count as userCount,
+		a.create_date as createDate,
+		a.create_user_id as createUserId,
+		a.update_date as updateDate,
+		a.update_user_id as updateUserId,
+		a.del_flg as delFlg
+	</sql>
+
+	<select id="findByPrimary" resultType="ContractHistory">
+		select 
+			<include refid="allColumns"/>
+		from
+			contract_history a
+		where
+			a.company_id = #{companyId} and
+			a.seq_no = #{seqNo} and
+			a.del_flg = '0'
+	</select>
+
+	<insert id="insert" parameterType="ContractHistory">
+		<selectKey keyProperty="seqNo" resultType="long" order="BEFORE">
+			select ifnull(max(seq_no), 0) + 1  as seqNo from contract_history where company_id = #{companyId}
+		</selectKey>
+		
+		insert into contract_history (
+			company_id,
+			seq_no,
+			contract_start_date,
+			user_count,
+			create_date,
+			create_user_id,
+			update_date,
+			update_user_id,
+			del_flg
+		)
+		values (
+			#{companyId},
+			#{seqNo},
+			#{contractStartDate},
+			#{userCount},
+			current_timestamp,
+			#{createUserId},
+			current_timestamp,
+			#{updateUserId},
+			'0'
+		)
+	</insert>
+
+	<update id="update" parameterType="ContractHistory">
+		update contract_history
+		set
+			contract_start_date = #{contractStartDate},
+			user_count = #{userCount},
+			update_date = #{updateDate},
+			update_user_id = #{updateUserId}
+		where
+			company_id = #{companyId} and
+			seq_no = #{seqNo}
+	</update>
+
+	<delete id="delete">
+		update contract_history
+		set
+			del_flg = '1'
+		where
+			company_id = #{companyId} and
+			seq_no = #{seqNo}
+	</delete>
+
+</mapper>

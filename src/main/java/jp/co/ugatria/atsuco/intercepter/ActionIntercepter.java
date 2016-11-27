@@ -9,7 +9,7 @@ import javax.ws.rs.core.Response.ResponseBuilder;
 import jp.co.ugatria.base.annotation.AsyncRequest;
 import jp.co.ugatria.base.annotation.UnnecessaryLogin;
 import jp.co.ugatria.base.log.LoggerFactory;
-import jp.co.ugatria.atsuco.dto.JsonResponse;
+import jp.co.ugatria.atsuco.dto.response.JsonResponse;
 import jp.co.ugatria.atsuco.dto.session.SessionInfo;
 
 import org.aspectj.lang.ProceedingJoinPoint;

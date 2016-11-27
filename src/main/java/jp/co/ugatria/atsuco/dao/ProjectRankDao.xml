@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.co.ugatria.atsuco.dao.ProjectRankDao">
+
+	<sql id="allColumns">
+		a.create_date as createDate,
+		a.create_user_id as createUserId,
+		a.update_date as updateDate,
+		a.update_user_id as updateUserId,
+		a.del_flg as delFlg
+	</sql>
+
+	<select id="findByPrimary" resultType="ProjectRank">
+	</select>
+
+	<insert id="insert" parameterType="ProjectRank">
+		<selectKey keyProperty="rankNo" resultType="long" order="BEFORE">
+			select ifnull(max(rank_no), 0) + 1  as rankNo from project_rRank where project_id = #{projectId}
+		</selectKey>
+
+		insert into project_rank (
+			create_date,
+			create_user_id,
+			update_date,
+			update_user_id,
+			del_flg
+		)
+		values (
+			current_timestamp,
+			#{createUserId},
+			current_timestamp,
+			#{updateUserId},
+			'0'
+		)
+	</insert>
+
+	<update id="update" parameterType="ProjectRank">
+		update project_rank
+		set
+			update_date = #{updateDate},
+			update_user_id = #{updateUserId}
+	</update>
+
+	<delete id="delete">
+		update project_rank
+		set
+			del_flg = '1'
+		where
+	</delete>
+
+</mapper>

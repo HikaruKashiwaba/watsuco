@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.co.ugatria.atsuco.dao.IssueCommentDao">
+
+	<sql id="allColumns">
+		a.company_id as companyId,
+		a.project_id as projectId,
+		a.task_id as taskId,
+		a.issue_id as issueId,
+		a.comment_no as commentNo,
+		a.comment as comment,
+		a.user_id as userId,
+		a.create_date as createDate,
+		a.create_user_id as createUserId,
+		a.update_date as updateDate,
+		a.update_user_id as updateUserId,
+		a.del_flg as delFlg
+	</sql>
+
+	<select id="findByPrimary" resultType="IssueComment">
+		select
+			<include refid="allColumns"/>
+		from
+			issue_comment a
+		where
+			a.issue_id = #{issueId} and
+			a.comment_no = #{commentNo} and
+			a.del_flg = '0'
+	</select>
+
+	<insert id="insert" parameterType="IssueComment">
+		<selectKey keyProperty="commentNo" resultType="long" order="BEFORE">
+			select ifnull(max(comment_no), 0) + 1  as commentNo from issue_comment where issue_id = #{issueId}
+		</selectKey>
+
+		insert into issue_comment (
+			company_id,
+			project_id,
+			task_id,
+			issue_id,
+			comment_no,
+			comment,
+			user_id,
+			create_date,
+			create_user_id,
+			update_date,
+			update_user_id,
+			del_flg
+		)
+		values (
+			#{companyId},
+			#{projectId},
+			#{taskId},
+			#{issueId},
+			#{commentNo},
+			#{comment},
+			#{userId},
+			current_timestamp,
+			#{createUserId},
+			current_timestamp,
+			#{updateUserId},
+			'0'
+		)
+	</insert>
+
+	<update id="update" parameterType="IssueComment">
+		update issue_comment
+		set
+			comment = #{comment},
+			update_date = #{updateDate},
+			update_user_id = #{updateUserId}
+		where
+			issue_id = #{issueId} and
+			comment_no = #{commentNo}
+	</update>
+
+	<delete id="delete">
+		update issue_comment
+		set
+			del_flg = '1'
+		where
+			issue_id = #{issueId} and
+			comment_no = #{commentNo}
+	</delete>
+
+</mapper>
