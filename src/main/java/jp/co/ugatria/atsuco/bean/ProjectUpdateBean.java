@@ -1,5 +1,9 @@
 package jp.co.ugatria.atsuco.bean;
 
+import java.util.List;
+
+import jp.co.ugatria.atsuco.entity.ProjectRank;
+import jp.co.ugatria.atsuco.entity.User;
 import jp.co.ugatria.atsuco.form.ProjectUpdateForm;
 
 public class ProjectUpdateBean extends BaseBean {
@@ -7,6 +11,10 @@ public class ProjectUpdateBean extends BaseBean {
 	private String projectId;
 
 	private ProjectUpdateForm form;
+
+	private List<User> users;
+
+	private List<ProjectRank> projectRanks;
 
 	/**
 	 * projectIdを取得します.
@@ -42,5 +50,41 @@ public class ProjectUpdateBean extends BaseBean {
 
 	public void setForm(ProjectUpdateForm form) {
 		this.form = form;
+	}
+
+	/**
+	 * usersを取得します.
+	 * @return List<User> users
+	 */
+
+	public List<User> getUsers() {
+		return users;
+	}
+
+	/**
+	 * users を設定します.
+	 * @param List<User> users
+	 */
+
+	public void setUsers(List<User> users) {
+		this.users = users;
+	}
+
+	/**
+	 * projectRanksを取得します.
+	 * @return List<ProjectRank> projectRanks
+	 */
+
+	public List<ProjectRank> getProjectRanks() {
+		return projectRanks;
+	}
+
+	/**
+	 * projectRanks を設定します.
+	 * @param List<ProjectRank> projectRanks
+	 */
+
+	public void setProjectRanks(List<ProjectRank> projectRanks) {
+		this.projectRanks = projectRanks;
 	}
 }

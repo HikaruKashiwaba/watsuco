@@ -25,6 +25,7 @@
           <li><a href="${ctxp}/page/projects">プロジェクト</a></li>
           <li class="active"><a href="${ctxp}/page/users">担当者</a></li>
           <li><a href="${ctxp}/page/issues">課題管理</a></li>
+          <li><a href="${ctxp}/page/report">レポート</a></li>
         </ul>
       </div>
     </div>

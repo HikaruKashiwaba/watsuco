@@ -13,9 +13,9 @@ import jp.co.ugatria.base.entity.BaseEntity;
  */
 public class Project extends BaseEntity {
 
-	private Integer companyId;
+	private Long companyId;
 
-	private Integer projectId;
+	private Long projectId;
 
 	private String projectName;
 
@@ -25,12 +25,18 @@ public class Project extends BaseEntity {
 
 	private Date endDate;
 
+	private Integer notStartCnt;
+
+	private Integer inWorkCnt;
+
+	private Integer finishCnt;
+
 	/**
 	 * companyIdを取得します.
 	 * @return Integer companyId
 	 */
 
-	public Integer getCompanyId() {
+	public Long getCompanyId() {
 		return companyId;
 	}
 
@@ -39,7 +45,7 @@ public class Project extends BaseEntity {
 	 * @param Integer companyId
 	 */
 
-	public void setCompanyId(Integer companyId) {
+	public void setCompanyId(Long companyId) {
 		this.companyId = companyId;
 	}
 
@@ -48,7 +54,7 @@ public class Project extends BaseEntity {
 	 * @return Integer projectId
 	 */
 
-	public Integer getProjectId() {
+	public Long getProjectId() {
 		return projectId;
 	}
 
@@ -57,7 +63,7 @@ public class Project extends BaseEntity {
 	 * @param Integer projectId
 	 */
 
-	public void setProjectId(Integer projectId) {
+	public void setProjectId(Long projectId) {
 		this.projectId = projectId;
 	}
 
@@ -131,6 +137,60 @@ public class Project extends BaseEntity {
 
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
+	}
+
+	/**
+	 * notStartCntを取得します.
+	 * @return Integer notStartCnt
+	 */
+
+	public Integer getNotStartCnt() {
+		return notStartCnt;
+	}
+
+	/**
+	 * notStartCnt を設定します.
+	 * @param Integer notStartCnt
+	 */
+
+	public void setNotStartCnt(Integer notStartCnt) {
+		this.notStartCnt = notStartCnt;
+	}
+
+	/**
+	 * inWorkCntを取得します.
+	 * @return Integer inWorkCnt
+	 */
+
+	public Integer getInWorkCnt() {
+		return inWorkCnt;
+	}
+
+	/**
+	 * inWorkCnt を設定します.
+	 * @param Integer inWorkCnt
+	 */
+
+	public void setInWorkCnt(Integer inWorkCnt) {
+		this.inWorkCnt = inWorkCnt;
+	}
+
+	/**
+	 * finishCntを取得します.
+	 * @return Integer finishCnt
+	 */
+
+	public Integer getFinishCnt() {
+		return finishCnt;
+	}
+
+	/**
+	 * finishCnt を設定します.
+	 * @param Integer finishCnt
+	 */
+
+	public void setFinishCnt(Integer finishCnt) {
+		this.finishCnt = finishCnt;
 	}
 
 }

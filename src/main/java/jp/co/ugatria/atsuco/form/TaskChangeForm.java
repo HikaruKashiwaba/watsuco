@@ -4,6 +4,10 @@ public class TaskChangeForm {
 
 	private String taskId;
 
+	private String companyId;
+
+	private String projectId;
+
 	private String userId;
 
 	private String status;
@@ -24,6 +28,42 @@ public class TaskChangeForm {
 
 	public void setTaskId(String taskId) {
 		this.taskId = taskId;
+	}
+
+	/**
+	 * companyIdを取得します.
+	 * @return String companyId
+	 */
+
+	public String getCompanyId() {
+		return companyId;
+	}
+
+	/**
+	 * companyId を設定します.
+	 * @param String companyId
+	 */
+
+	public void setCompanyId(String companyId) {
+		this.companyId = companyId;
+	}
+
+	/**
+	 * projectIdを取得します.
+	 * @return String projectId
+	 */
+
+	public String getProjectId() {
+		return projectId;
+	}
+
+	/**
+	 * projectId を設定します.
+	 * @param String projectId
+	 */
+
+	public void setProjectId(String projectId) {
+		this.projectId = projectId;
 	}
 
 	/**
@@ -61,5 +101,4 @@ public class TaskChangeForm {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-
 }

@@ -3,6 +3,11 @@
 <mapper namespace="jp.co.ugatria.atsuco.dao.ProjectTeamDao">
 
 	<sql id="allColumns">
+		a.company_id as companyId,
+		a.project_id as projectId,
+		a.user_id as userId,
+		a.role,
+		a.carry_point as carryPoint,
 		a.create_date as createDate,
 		a.create_user_id as createUserId,
 		a.update_date as updateDate,
@@ -10,11 +15,63 @@
 		a.del_flg as delFlg
 	</sql>
 
-	<select id="findByPrimary" resultType="ProjectTeam">
+	<resultMap type="ProjectTeam" id="pojectTeam">
+		<result property="companyId" column="companyId" />
+		<result property="projectId" column="projectId" />
+		<result property="userId" column="userId" />
+		<result property="role" column="role" />
+		<result property="carryPoint" column="carryPoint" />
+		<result property="companyId" column="companyId" />
+		<result property="project.projectName" column="projectName" />
+		<result property="project.notStartCnt" column="notStartCnt" />
+		<result property="project.inWorkCnt" column="inWorkCnt" />
+		<result property="project.finishCnt" column="finishCnt" />
+	</resultMap>
+
+	<select id="findByProjectId" resultMap="pojectTeam">
+		select
+			<include refid="allColumns"/>,
+			b.project_name as projectName,
+			c.notStartCnt,
+			c.inWorkCnt,
+			c.finishCnt
+		from
+			project_team a
+		inner join
+			project b
+			on a.project_id = b.project_id
+		left join
+		(
+			select
+				c.project_id,
+				sum(case when c.status = 1 then 1 else 0 end) as notStartCnt,
+				sum(case when c.status = 2 then 1 else 0 end) as inWorkCnt,
+				sum(case when c.status = 3 then 1 else 0 end) as finishCnt
+			from
+				task c
+			where
+				c.company_id = #{companyId} and
+				c.user_id = #{userId} and
+				c.del_flg = '0'
+			group by
+				c.project_id
+		) c
+			on a.project_id = c.project_id
+		where
+			a.company_id = #{companyId} and
+			a.user_id = #{userId} and
+			a.del_flg = '0'
+		order by
+			a.project_id
 	</select>
 
 	<insert id="insert" parameterType="ProjectTeam">
 		insert into project_team (
+			company_id,
+			project_id,
+			user_id,
+			role,
+			carry_point,
 			create_date,
 			create_user_id,
 			update_date,
@@ -22,6 +79,11 @@
 			del_flg
 		)
 		values (
+			#{companyId},
+			#{projectId},
+			#{userId},
+			'1',
+			0,
 			current_timestamp,
 			#{createUserId},
 			current_timestamp,
@@ -30,18 +92,11 @@
 		)
 	</insert>
 
-	<update id="update" parameterType="ProjectTeam">
-		update project_team
-		set
-			update_date = #{updateDate},
-			update_user_id = #{updateUserId}
-	</update>
-
-	<delete id="delete">
-		update project_team
-		set
-			del_flg = '1'
+	<delete id="deleteByProjectId">
+		delete from project_team
 		where
+			company_id = #{companyId} and
+			project_id = #{projectId}
 	</delete>
 
 </mapper>

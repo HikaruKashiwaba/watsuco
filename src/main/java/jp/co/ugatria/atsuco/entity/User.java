@@ -13,6 +13,8 @@ import jp.co.ugatria.base.entity.BaseEntity;
  */
 public class User extends BaseEntity {
 
+	private Long companyId;
+
 	private Long userId;
 
 	private String email;
@@ -28,6 +30,24 @@ public class User extends BaseEntity {
 	private String iconFile;
 
 	private Date lastLoginDate;
+
+	/**
+	 * companyIdを取得します.
+	 * @return Long companyId
+	 */
+
+	public Long getCompanyId() {
+		return companyId;
+	}
+
+	/**
+	 * companyId を設定します.
+	 * @param Long companyId
+	 */
+
+	public void setCompanyId(Long companyId) {
+		this.companyId = companyId;
+	}
 
 	/**
 	 * userIdを取得します.

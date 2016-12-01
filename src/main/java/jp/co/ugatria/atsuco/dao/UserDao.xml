@@ -3,6 +3,7 @@
 <mapper namespace="jp.co.ugatria.atsuco.dao.UserDao">
 
 	<sql id="allColumns">
+		a.company_id as companyId,
 		a.user_id as userId,
 		a.email,
 		a.password,
@@ -24,7 +25,8 @@
 		from
 			user a
 		 where
-		 	a.user_id = #{userId}
+		 	a.user_id = #{userId} and
+		 	a.del_flg = '0'
 	</select>
 
 	<select id="findByLoginId" resultType="User">
@@ -33,7 +35,33 @@
 		from
 			user a
 		 where
-		 	a.email = #{email}
+		 	a.email = #{email} and
+		 	a.del_flg = '0'
+	</select>
+
+	<select id="findByProjectId" resultType="User">
+		select
+			<include refid="allColumns"/>
+		from
+			user a,
+			project_team b
+		 where
+		 	a.company_id = #{companyId} and
+		 	a.del_flg = '0' and
+		 	a.user_id = b.user_id and
+		 	b.company_id = #{companyId} and
+		 	b.project_id = #{projectId} and
+		 	b.del_flg = '0'
+	</select>
+
+	<select id="findAll" resultType="User">
+		select
+			<include refid="allColumns"/>
+		from
+			user a
+		 where
+		 	a.company_id = #{companyId} and
+		 	a.del_flg = '0'
 	</select>
 
 	<insert id="insert" parameterType="User">

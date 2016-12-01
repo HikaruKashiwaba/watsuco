@@ -14,7 +14,9 @@ import jp.co.ugatria.atsuco.bean.ProjectListBean;
 import jp.co.ugatria.atsuco.bean.ProjectUpdateBean;
 import jp.co.ugatria.atsuco.form.ProjectCreateForm;
 import jp.co.ugatria.atsuco.form.ProjectUpdateForm;
+import jp.co.ugatria.atsuco.service.ProjectService;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.sun.jersey.api.core.InjectParam;
@@ -27,10 +29,16 @@ import com.sun.jersey.api.core.InjectParam;
 @Path("/projects")
 public class ProjectAction extends BaseAction {
 
+	@Autowired
+	private ProjectService service;
+
 	@GET
 	public Response list() {
 		ProjectListBean bean = new ProjectListBean();
+		bean.setLoginInfo(getLoginInfo());
 		setBean(bean);
+
+		service.getList(bean);
 
 		return getViewResponse("projectList");
 	}
@@ -39,9 +47,11 @@ public class ProjectAction extends BaseAction {
 	@Path("{projectId}/update")
 	public Response edit(@PathParam("projectId") String projectId) {
 		ProjectUpdateBean bean = new ProjectUpdateBean();
+		bean.setLoginInfo(getLoginInfo());
 		bean.setProjectId(projectId);
-		bean.setForm(new ProjectUpdateForm());
 		setBean(bean);
+
+		service.getDataForUpdate(bean);
 
 		return getViewResponse("projectUpdate");
 	}
@@ -50,9 +60,12 @@ public class ProjectAction extends BaseAction {
 	@Path("{projectId}/update")
 	public Response update(@PathParam("projectId") String projectId, @InjectParam ProjectUpdateForm form) {
 		ProjectUpdateBean bean = new ProjectUpdateBean();
+		bean.setLoginInfo(getLoginInfo());
 		bean.setProjectId(projectId);
 		bean.setForm(form);
 		setBean(bean);
+
+		service.updateProject(bean);
 
 		return redirect("/projects/" + projectId + "/update");
 	}
@@ -61,8 +74,11 @@ public class ProjectAction extends BaseAction {
 	@Path("create")
 	public Response entry() {
 		ProjectCreateBean bean = new ProjectCreateBean();
+		bean.setLoginInfo(getLoginInfo());
 		bean.setForm(new ProjectCreateForm());
 		setBean(bean);
+
+		service.getDataForCreate(bean);
 
 		return getViewResponse("projectCreate");
 	}
@@ -71,8 +87,11 @@ public class ProjectAction extends BaseAction {
 	@Path("create")
 	public Response create(@InjectParam ProjectCreateForm form) {
 		ProjectCreateBean bean = new ProjectCreateBean();
+		bean.setLoginInfo(getLoginInfo());
 		bean.setForm(form);
 		setBean(bean);
+
+		service.createProject(bean);
 
 		String projectId = "1";
 		return redirect("/projects/" + projectId + "/update");

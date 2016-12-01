@@ -8,20 +8,20 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 public class BaseEntity implements Serializable {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = -4005538167438363517L;
 
 	private Date createDate;
 
 	private Date updateDate;
-	
+
 	/* 作成者ID */
-	private String createUserId;
+	private Long createUserId;
 
 	/* 更新者ID */
-	private String updateUserId;
-	
+	private Long updateUserId;
+
 	private String delFlg;
 
 	public String toString() {
@@ -64,7 +64,7 @@ public class BaseEntity implements Serializable {
 	 * createUserIdを取得します.
 	 * @return String createUserId
 	 */
-	public String getCreateUserId() {
+	public Long getCreateUserId() {
 		return createUserId;
 	}
 
@@ -72,7 +72,7 @@ public class BaseEntity implements Serializable {
 	 * createUserId を設定します.
 	 * @param String createUserId
 	 */
-	public void setCreateUserId(String createUserId) {
+	public void setCreateUserId(Long createUserId) {
 		this.createUserId = createUserId;
 	}
 
@@ -80,7 +80,7 @@ public class BaseEntity implements Serializable {
 	 * updateUserIdを取得します.
 	 * @return String updateUserId
 	 */
-	public String getUpdateUserId() {
+	public Long getUpdateUserId() {
 		return updateUserId;
 	}
 
@@ -88,7 +88,7 @@ public class BaseEntity implements Serializable {
 	 * updateUserId を設定します.
 	 * @param String updateUserId
 	 */
-	public void setUpdateUserId(String updateUserId) {
+	public void setUpdateUserId(Long updateUserId) {
 		this.updateUserId = updateUserId;
 	}
 

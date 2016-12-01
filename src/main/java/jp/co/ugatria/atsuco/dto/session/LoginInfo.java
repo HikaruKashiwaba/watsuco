@@ -7,6 +7,8 @@ public class LoginInfo implements Serializable {
 
 	private static final long serialVersionUID = 5718933882348866040L;
 
+	private Long companyId;
+
 	private Long userId;
 
 	private String email;
@@ -18,6 +20,24 @@ public class LoginInfo implements Serializable {
 	private Long projectId;
 
 	public LoginInfo() {
+	}
+
+	/**
+	 * companyIdを取得します.
+	 * @return Long companyId
+	 */
+
+	public Long getCompanyId() {
+		return companyId;
+	}
+
+	/**
+	 * companyId を設定します.
+	 * @param Long companyId
+	 */
+
+	public void setCompanyId(Long companyId) {
+		this.companyId = companyId;
 	}
 
 	/**

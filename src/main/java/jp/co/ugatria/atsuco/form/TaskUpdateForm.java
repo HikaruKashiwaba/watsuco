@@ -4,6 +4,9 @@ import javax.ws.rs.FormParam;
 
 public class TaskUpdateForm {
 
+	private String taskId;
+
+	private String companyId;
 
 	@FormParam("projectId")
 	private String projectId;
@@ -22,6 +25,45 @@ public class TaskUpdateForm {
 
 	@FormParam("rankNo")
 	private String rankNo;
+
+	@FormParam("comment")
+	private String comment;
+
+	/**
+	 * taskIdを取得します.
+	 * @return String taskId
+	 */
+
+	public String getTaskId() {
+		return taskId;
+	}
+
+	/**
+	 * taskId を設定します.
+	 * @param String taskId
+	 */
+
+	public void setTaskId(String taskId) {
+		this.taskId = taskId;
+	}
+
+	/**
+	 * companyIdを取得します.
+	 * @return String companyId
+	 */
+
+	public String getCompanyId() {
+		return companyId;
+	}
+
+	/**
+	 * companyId を設定します.
+	 * @param String companyId
+	 */
+
+	public void setCompanyId(String companyId) {
+		this.companyId = companyId;
+	}
 
 	/**
 	 * projectIdを取得します.
@@ -129,5 +171,23 @@ public class TaskUpdateForm {
 
 	public void setRankNo(String rankNo) {
 		this.rankNo = rankNo;
+	}
+
+	/**
+	 * commentを取得します.
+	 * @return String comment
+	 */
+
+	public String getComment() {
+		return comment;
+	}
+
+	/**
+	 * comment を設定します.
+	 * @param String comment
+	 */
+
+	public void setComment(String comment) {
+		this.comment = comment;
 	}
 }

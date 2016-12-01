@@ -11,7 +11,27 @@ import jp.co.ugatria.atsuco.form.TaskChangeForm;
  */
 public class TaskChangeBean extends BaseBean {
 
+	private String taskId;
+
 	private TaskChangeForm form;
+
+	/**
+	 * taskIdを取得します.
+	 * @return String taskId
+	 */
+
+	public String getTaskId() {
+		return taskId;
+	}
+
+	/**
+	 * taskId を設定します.
+	 * @param String taskId
+	 */
+
+	public void setTaskId(String taskId) {
+		this.taskId = taskId;
+	}
 
 	/**
 	 * formを取得します.

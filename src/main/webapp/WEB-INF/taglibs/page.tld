@@ -10,7 +10,7 @@
 
 	<function>
 		<name>seq</name>
-		<function-class>jp.co.ugatria.care.tag.PageFunctions</function-class>
+		<function-class>jp.co.ugatria.base.tag.PageFunctions</function-class>
 		<function-signature>
 			String[] seq(int, int, int)
 		</function-signature>

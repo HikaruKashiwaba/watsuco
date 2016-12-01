@@ -3,6 +3,17 @@
 <mapper namespace="jp.co.ugatria.atsuco.dao.TaskDao">
 
 	<sql id="allColumns">
+		a.company_id as companyId,
+		a.project_id as projectId,
+		a.task_id as taskId,
+		a.title,
+		a.contents,
+		a.start_deadline_date as startDeadlineDate,
+		a.end_deadline_date as endDeadlineDate,
+		a.status,
+		a.rank_no as rankNo,
+		a.point,
+		a.user_id as userId,
 		a.create_date as createDate,
 		a.create_user_id as createUserId,
 		a.update_date as updateDate,
@@ -11,14 +22,45 @@
 	</sql>
 
 	<select id="findByPrimary" resultType="Task">
+		select
+			<include refid="allColumns"/>
+		from
+			task a
+		where
+			a.company_id = #{companyId} and
+			a.project_id = #{projectId} and
+			a.task_id = #{taskId} and
+			a.del_flg = '0'
+	</select>
+
+	<select id="findByProjectId" resultType="Task">
+		select
+			<include refid="allColumns"/>
+		from
+			task a
+		 where
+			a.company_id = #{companyId} and
+			a.project_id = #{projectId} and
+			a.del_flg = '0'
 	</select>
 
 	<insert id="insert" parameterType="Task">
-		<selectKey keyProperty="tasskId" resultType="long" order="AFTER">
-			select last_insert_id() as tasskId
+		<selectKey keyProperty="taskId" resultType="long" order="AFTER">
+			select last_insert_id() as taskId
 		</selectKey>
 
-		insert into tassk (
+		insert into task (
+			company_id,
+			project_id,
+			task_id,
+			title,
+			contents,
+			start_deadline_date,
+			end_deadline_date,
+			status,
+			rank_no,
+			point,
+			user_id,
 			create_date,
 			create_user_id,
 			update_date,
@@ -26,6 +68,17 @@
 			del_flg
 		)
 		values (
+			#{companyId},
+			#{projectId},
+			#{taskId},
+			#{title},
+			#{contents},
+			#{startDeadlineDate},
+			#{endDeadlineDate},
+			'1',
+			#{rankNo},
+			(select point from project_rank where company_id = #{companyId} and project_id = #{projectId} and rank_no = #{rankNo}),
+			#{userId},
 			current_timestamp,
 			#{createUserId},
 			current_timestamp,
@@ -35,18 +88,46 @@
 	</insert>
 
 	<update id="update" parameterType="Task">
-		update tassk
+		update task
 		set
-			update_date = #{updateDate},
+			title = #{title},
+			contents = #{contents},
+			start_deadline_date = #{startDeadlineDate},
+			end_deadline_date = #{endDeadlineDate},
+			rank_no = #{rankNo},
+			point = (select point from project_rank where company_id = #{companyId} and project_id = #{projectId} and rank_no = #{rankNo}),
+			update_date = current_timestamp,
 			update_user_id = #{updateUserId}
+		where
+			company_id = #{companyId} and
+			project_id = #{projectId} and
+			task_id = #{taskId} and
+			del_flg = '0'
+	</update>
+
+	<update id="updateUserAndStatus" parameterType="Task">
+		update task
+		set
+			status = #{status},
+			user_id = #{userId},
+			update_date = current_timestamp,
+			update_user_id = #{updateUserId}
+		where
+			company_id = #{companyId} and
+			project_id = #{projectId} and
+			task_id = #{taskId} and
+			del_flg = '0'
 	</update>
 
 	<update id="delete">
-		update tassk
+		update task
 		set
 			del_flg = '1'
 		where
-			task_id = #{taskId}
+			company_id = #{companyId} and
+			project_id = #{projectId} and
+			task_id = #{taskId} and
+			del_flg = '0'
 	</update>
 
 </mapper>

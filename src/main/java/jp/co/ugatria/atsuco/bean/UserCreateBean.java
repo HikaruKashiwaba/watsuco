@@ -13,6 +13,8 @@ public class UserCreateBean extends BaseBean {
 
 	private UserCreateForm form;
 
+	private Long userId;
+
 	/**
 	 * formを取得します.
 	 * @return UserCreateForm form
@@ -29,5 +31,23 @@ public class UserCreateBean extends BaseBean {
 
 	public void setForm(UserCreateForm form) {
 		this.form = form;
+	}
+
+	/**
+	 * userIdを取得します.
+	 * @return Long userId
+	 */
+
+	public Long getUserId() {
+		return userId;
+	}
+
+	/**
+	 * userId を設定します.
+	 * @param Long userId
+	 */
+
+	public void setUserId(Long userId) {
+		this.userId = userId;
 	}
 }

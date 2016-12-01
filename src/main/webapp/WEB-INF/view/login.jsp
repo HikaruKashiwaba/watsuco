@@ -24,7 +24,7 @@
         <div class="form-group">
           <label for="email" class="col-sm-2 control-label">Email address</label>
           <div class="col-sm-10">
-            <input type="text" id="email" name="email" class="form-control" placeholder="Email address" autofocus />
+            <input type="text" id="email" name="email" class="form-control" value="${it.bean.form.email}" placeholder="Email address" autofocus />
           </div>
         </div>
         <div class="form-group">
@@ -41,7 +41,6 @@
       </form>
 
     </div> <!-- /container -->
-
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>

@@ -10,7 +10,7 @@
 
 	<function>
 		<name>list</name>
-		<function-class>jp.co.ugatria.care.tag.MessageFunctions</function-class>
+		<function-class>jp.co.ugatria.base.tag.MessageFunctions</function-class>
 		<function-signature>
 			java.util.List toOrderedArray(java.util.Set, java.lang.String)
 		</function-signature>
@@ -18,7 +18,7 @@
 
 	<function>
 		<name>selectOne</name>
-		<function-class>jp.co.ugatria.care.tag.MessageFunctions</function-class>
+		<function-class>jp.co.ugatria.base.tag.MessageFunctions</function-class>
 		<function-signature>
 			java.util.List pickupFirstHit(java.util.Set, java.lang.String)
 		</function-signature>

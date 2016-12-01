@@ -25,6 +25,7 @@
           <li><a href="${ctxp}/page/projects">プロジェクト</a></li>
           <li class="active"><a href="${ctxp}/page/users">担当者</a></li>
           <li><a href="${ctxp}/page/issues">課題管理</a></li>
+          <li><a href="${ctxp}/page/report">レポート</a></li>
         </ul>
       </div>
     </div>
@@ -47,13 +48,20 @@
         </tr>
       </thead>
       <tbody>
-        <tr onclick="location.href='${ctxp}/page/users/1'">
-          <td>1</td>
-          <td>kashiwaba@ugatria.co.jp</td>
-          <td>柏葉　光</td>
-          <td>一般</td>
-          <td>2016/11/03</td>
+        <c:forEach var="user" items="${it.bean.users}">
+        <tr onclick="location.href='${ctxp}/page/users/${user.userId}'">
+          <td>${user.userId}</td>
+          <td><c:out value="${user.email}" /></td>
+          <td><c:out value="${user.userName}" /></td>
+          <td>
+            <c:choose>
+              <c:when test="${user.authority == '1'}">一般</c:when>
+              <c:when test="${user.authority == '2'}">管理者　</c:when>
+            </c:choose>
+          </td>
+          <td><fmt:formatDate value="${user.lastLoginDate}" pattern="yyyy/MM/dd" /></td>
         </tr>
+        </c:forEach>
       </tbody>
     </table>
   </div>

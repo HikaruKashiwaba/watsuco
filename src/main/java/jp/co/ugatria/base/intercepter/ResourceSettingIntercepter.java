@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 @Aspect
 public class ResourceSettingIntercepter {
 
-	@Pointcut("execution(public * jp.co.ugatria.base.action.*.*(..))")
+	@Pointcut("execution(public * jp.co.ugatria.atsuco.action.*.*(..))")
 	public void pointCut() {
 	}
 

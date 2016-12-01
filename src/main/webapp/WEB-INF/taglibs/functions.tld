@@ -10,7 +10,7 @@
 
 	<function>
 		<name>contains</name>
-		<function-class>jp.co.ugatria.care.tag.Functions</function-class>
+		<function-class>jp.co.ugatria.base.tag.Functions</function-class>
 		<function-signature>
 			boolean contains(java.lang.Object, java.lang.Object)
 		</function-signature>
@@ -18,7 +18,7 @@
 
 	<function>
 		<name>formatNumber</name>
-		<function-class>jp.co.ugatria.care.tag.Functions</function-class>
+		<function-class>jp.co.ugatria.base.tag.Functions</function-class>
 		<function-signature>
 			java.lang.String formatNumber(java.lang.String, java.lang.String)
 		</function-signature>
@@ -26,7 +26,7 @@
 
 	<function>
 		<name>hasAuth</name>
-		<function-class>jp.co.ugatria.care.tag.Functions</function-class>
+		<function-class>jp.co.ugatria.base.tag.Functions</function-class>
 		<function-signature>
 			boolean hasAuth(jp.co.ugatria.care.dto.session.LoginInfo, java.lang.String)
 		</function-signature>
@@ -34,7 +34,7 @@
 
 	<function>
 		<name>formatDate</name>
-		<function-class>jp.co.ugatria.care.tag.Functions</function-class>
+		<function-class>jp.co.ugatria.base.tag.Functions</function-class>
 		<function-signature>
 			java.lang.String formatDate(java.util.Date)
 		</function-signature>
@@ -42,7 +42,7 @@
 
 	<function>
 		<name>formatSpan</name>
-		<function-class>jp.co.ugatria.care.tag.Functions</function-class>
+		<function-class>jp.co.ugatria.base.tag.Functions</function-class>
 		<function-signature>
 			java.lang.String formatSpan(java.util.Date, java.util.Date)
 		</function-signature>
@@ -50,7 +50,7 @@
 
 	<function>
 		<name>outLineBreak</name>
-		<function-class>jp.co.ugatria.care.tag.Functions</function-class>
+		<function-class>jp.co.ugatria.base.tag.Functions</function-class>
 		<function-signature>
 			java.lang.String outLineBreak(java.lang.Object)
 		</function-signature>
@@ -58,7 +58,7 @@
 
 	<function>
 		<name>beforeDayAfterMonth</name>
-		<function-class>jp.co.ugatria.care.tag.Functions</function-class>
+		<function-class>jp.co.ugatria.base.tag.Functions</function-class>
 		<function-signature>
 			java.util.Date beforeDayAfterMonth(java.util.Date, int)
 		</function-signature>

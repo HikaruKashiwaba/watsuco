@@ -20,19 +20,46 @@
 		a.del_flg as delFlg
 	</sql>
 
-	<select id="findByPrimary" resultType="DailyReport">
+	<select id="sumStatusCnt" resultType="DailyReport">
 		select
-			<include refid="allColumns"/>
+			a.report_date as reportDate,
+			sum(a.not_start_cnt) as notStartCnt,
+			sum(a.in_work_cnt) as inWorkCnt,
+			sum(a.finish_cnt) as finishCnt
 		from
 			daily_report a
 		where
+			a.company_id = #{companyId} and
 			a.project_id = #{projectId} and
-			a.user_id = #{userId} and
-			a.report_date = #{reportDate} and
 			a.del_flg = '0'
+		group by
+			a.company_id,
+			a.project_id,
+			a.report_date
+		order by
+			a.report_date
 	</select>
 
-	<insert id="insert" parameterType="DailyReport">
+	<select id="sumDelayCnt" resultType="DailyReport">
+		select
+			a.report_date as reportDate,
+			sum(a.start_delayed_cnt) as startDelayedCnt,
+			sum(a.complete_delayed_cnt) as completeDelayedCnt
+		from
+			daily_report a
+		where
+			a.company_id = #{companyId} and
+			a.project_id = #{projectId} and
+			a.del_flg = '0'
+		group by
+			a.company_id,
+			a.project_id,
+			a.report_date
+		order by
+			a.report_date
+	</select>
+
+	<insert id="insert">
 		insert into daily_report (
 			company_id,
 			project_id,
@@ -50,53 +77,27 @@
 			update_user_id,
 			del_flg
 		)
-		values (
-			#{companyId},
-			#{projectId},
-			#{userId},
-			#{reportDate},
-			#{notStartCnt},
-			#{inWorkCnt},
-			#{finishCnt},
-			#{totalCnt},
-			#{startDelayedCnt},
-			#{completeDelayedCnt},
+		select
+			company_id,
+			project_id,
+			isnull(user_id, 0) as user_id,
+			current_date,
+			sum(case when status = '1' then 1 else 0 end) as not_start_cnt,
+			sum(case when status = '2' then 1 else 0 end) as in_work_cnt,
+			sum(case when status = '3' then 1 else 0 end) as finish_cnt,
+			count(*) as total_cnt,
+			sum(case when status = '1' and start_deadline_date &lt; '${today} 00:00:00' then 1 else 0 end) as start_delayed_cnt,
+			sum(case when status != '3' and end_deadline_date &lt; '${today} 00:00:00' then 1 else 0 end) as complete_delayed_cnt,
 			current_timestamp,
-			#{createUserId},
+			0,
 			current_timestamp,
-			#{updateUserId},
+			0,
 			'0'
-		)
+		from
+			task
+		group by
+			company_id,
+			project_id,
+			user_id
 	</insert>
-
-	<update id="update" parameterType="DailyReport">
-		update daily_report
-		set
-			company_id = #{companyId},
-			project_id = #{projectId},
-			user_id = #{userId},
-			report_date = #{reportDate},
-			not_start_cnt = #{notStartCnt},
-			in_work_cnt = #{inWorkCnt},
-			finish_cnt = #{finishCnt},
-			total_cnt = #{totalCnt},
-			start_delayed_cnt = #{startDelayedCnt},
-			complete_delayed_cnt = #{completeDelayedCnt},
-			update_date = #{updateDate},
-			update_user_id = #{updateUserId}
-		where
-			a.project_id = #{projectId} and
-			a.user_id = #{userId} and
-			a.report_date = #{reportDate}
-	</update>
-
-	<delete id="delete">
-		update daily_report
-		set
-			del_flg = '1'
-		where
-			a.project_id = #{projectId} and
-			a.user_id = #{userId} and
-			a.report_date = #{reportDate}
-	</delete>
 </mapper>

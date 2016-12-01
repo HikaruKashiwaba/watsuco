@@ -25,6 +25,7 @@
           <li class="active"><a href="${ctxp}/page/projects">プロジェクト</a></li>
           <li><a href="${ctxp}/page/users">担当者</a></li>
           <li><a href="${ctxp}/page/issues">課題管理</a></li>
+          <li><a href="${ctxp}/page/report">レポート</a></li>
         </ul>
       </div>
     </div>
@@ -35,7 +36,15 @@
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-right">
        <button type="button" onclick="location.href='${ctxp}/page/projects/create'" class="btn btn-default" ><i class="glyphicon glyphicon-plus"></i> 作成する</button>
     </div>
+  </div>
 
+  <div class="container">
+
+	<c:if test="${empty it.bean.projects }">
+      <div class="alert alert-info" role="alert">プロジェクトはありません。</div>
+	</c:if>
+
+	<c:if test="${!empty it.bean.projects }">
     <table class="table table-striped table-hover">
       <thead>
         <tr>
@@ -52,17 +61,20 @@
         </tr>
       </thead>
       <tbody>
-        <tr onclick="location.href='${ctxp}/page/projects/1/update'">
-          <td>1</td>
-          <td>FSP</td>
-          <td>2016/4/1</td>
-          <td>-</td>
-          <td class="text-right">21</td>
-          <td class="text-right">20</td>
-          <td class="text-right">214</td>
+        <c:forEach var="project" items="${it.bean.projects}" >
+        <tr onclick="location.href='${ctxp}/page/projects/${project.projectId}/update'">
+          <td>${project.projectId}</td>
+          <td><c:out value="${project.projectName}" /></td>
+          <td><fmt:formatDate value="${project.startDate}" pattern="yyyy/MM/dd"/></td>
+          <td><fmt:formatDate value="${project.endDate}" pattern="yyyy/MM/dd"/></td>
+          <td class="text-right">${project.notStartCnt}</td>
+          <td class="text-right">${project.inWorkCnt}</td>
+          <td class="text-right">${project.finishCnt}</td>
         </tr>
+        </c:forEach>
       </tbody>
     </table>
+	</c:if>
   </div>
 
 </body>

@@ -11,22 +11,24 @@ import jp.co.ugatria.base.entity.BaseEntity;
  */
 public class ProjectTeam extends BaseEntity {
 
-	private Integer companyId;
+	private Long companyId;
 
-	private Integer projectId;
+	private Long projectId;
 
-	private Integer userId;
+	private Long userId;
 
 	private String role;
 
 	private Integer carryPoint;
+
+	private Project project;
 
 	/**
 	 * companyIdを取得します.
 	 * @return Integer companyId
 	 */
 
-	public Integer getCompanyId() {
+	public Long getCompanyId() {
 		return companyId;
 	}
 
@@ -35,7 +37,7 @@ public class ProjectTeam extends BaseEntity {
 	 * @param Integer companyId
 	 */
 
-	public void setCompanyId(Integer companyId) {
+	public void setCompanyId(Long companyId) {
 		this.companyId = companyId;
 	}
 
@@ -44,7 +46,7 @@ public class ProjectTeam extends BaseEntity {
 	 * @return Integer projectId
 	 */
 
-	public Integer getProjectId() {
+	public Long getProjectId() {
 		return projectId;
 	}
 
@@ -53,7 +55,7 @@ public class ProjectTeam extends BaseEntity {
 	 * @param Integer projectId
 	 */
 
-	public void setProjectId(Integer projectId) {
+	public void setProjectId(Long projectId) {
 		this.projectId = projectId;
 	}
 
@@ -62,7 +64,7 @@ public class ProjectTeam extends BaseEntity {
 	 * @return Integer userId
 	 */
 
-	public Integer getUserId() {
+	public Long getUserId() {
 		return userId;
 	}
 
@@ -71,7 +73,7 @@ public class ProjectTeam extends BaseEntity {
 	 * @param Integer userId
 	 */
 
-	public void setUserId(Integer userId) {
+	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
 
@@ -109,6 +111,24 @@ public class ProjectTeam extends BaseEntity {
 
 	public void setCarryPoint(Integer carryPoint) {
 		this.carryPoint = carryPoint;
+	}
+
+	/**
+	 * projectを取得します.
+	 * @return Project project
+	 */
+
+	public Project getProject() {
+		return project;
+	}
+
+	/**
+	 * project を設定します.
+	 * @param Project project
+	 */
+
+	public void setProject(Project project) {
+		this.project = project;
 	}
 
 }

@@ -13,11 +13,11 @@ import jp.co.ugatria.base.entity.BaseEntity;
  */
 public class DailyReport extends BaseEntity {
 
-	private Integer companyId;
+	private Long companyId;
 
-	private Integer projectId;
+	private Long projectId;
 
-	private Integer userId;
+	private Long userId;
 
 	private Date reportDate;
 
@@ -38,7 +38,7 @@ public class DailyReport extends BaseEntity {
 	 * @return Integer companyId
 	 */
 
-	public Integer getCompanyId() {
+	public Long getCompanyId() {
 		return companyId;
 	}
 
@@ -47,7 +47,7 @@ public class DailyReport extends BaseEntity {
 	 * @param Integer companyId
 	 */
 
-	public void setCompanyId(Integer companyId) {
+	public void setCompanyId(Long companyId) {
 		this.companyId = companyId;
 	}
 
@@ -56,7 +56,7 @@ public class DailyReport extends BaseEntity {
 	 * @return Integer projectId
 	 */
 
-	public Integer getProjectId() {
+	public Long getProjectId() {
 		return projectId;
 	}
 
@@ -65,7 +65,7 @@ public class DailyReport extends BaseEntity {
 	 * @param Integer projectId
 	 */
 
-	public void setProjectId(Integer projectId) {
+	public void setProjectId(Long projectId) {
 		this.projectId = projectId;
 	}
 
@@ -74,7 +74,7 @@ public class DailyReport extends BaseEntity {
 	 * @return Integer userId
 	 */
 
-	public Integer getUserId() {
+	public Long getUserId() {
 		return userId;
 	}
 
@@ -83,7 +83,7 @@ public class DailyReport extends BaseEntity {
 	 * @param Integer userId
 	 */
 
-	public void setUserId(Integer userId) {
+	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
 

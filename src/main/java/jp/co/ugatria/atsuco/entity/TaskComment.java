@@ -11,24 +11,24 @@ import jp.co.ugatria.base.entity.BaseEntity;
  */
 public class TaskComment extends BaseEntity {
 
-	private Integer companyId;
+	private Long companyId;
 
-	private Integer projectId;
+	private Long projectId;
 
-	private Integer taskId;
+	private Long taskId;
 
 	private Integer commentNo;
 
 	private String comment;
 
-	private Integer userId;
+	private Long userId;
 
 	/**
 	 * companyIdを取得します.
 	 * @return Integer companyId
 	 */
 
-	public Integer getCompanyId() {
+	public Long getCompanyId() {
 		return companyId;
 	}
 
@@ -37,7 +37,7 @@ public class TaskComment extends BaseEntity {
 	 * @param Integer companyId
 	 */
 
-	public void setCompanyId(Integer companyId) {
+	public void setCompanyId(Long companyId) {
 		this.companyId = companyId;
 	}
 
@@ -46,7 +46,7 @@ public class TaskComment extends BaseEntity {
 	 * @return Integer projectId
 	 */
 
-	public Integer getProjectId() {
+	public Long getProjectId() {
 		return projectId;
 	}
 
@@ -55,7 +55,7 @@ public class TaskComment extends BaseEntity {
 	 * @param Integer projectId
 	 */
 
-	public void setProjectId(Integer projectId) {
+	public void setProjectId(Long projectId) {
 		this.projectId = projectId;
 	}
 
@@ -64,7 +64,7 @@ public class TaskComment extends BaseEntity {
 	 * @return Integer taskId
 	 */
 
-	public Integer getTaskId() {
+	public Long getTaskId() {
 		return taskId;
 	}
 
@@ -73,7 +73,7 @@ public class TaskComment extends BaseEntity {
 	 * @param Integer taskId
 	 */
 
-	public void setTaskId(Integer taskId) {
+	public void setTaskId(Long taskId) {
 		this.taskId = taskId;
 	}
 
@@ -118,7 +118,7 @@ public class TaskComment extends BaseEntity {
 	 * @return Integer userId
 	 */
 
-	public Integer getUserId() {
+	public Long getUserId() {
 		return userId;
 	}
 
@@ -127,7 +127,7 @@ public class TaskComment extends BaseEntity {
 	 * @param Integer userId
 	 */
 
-	public void setUserId(Integer userId) {
+	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
 

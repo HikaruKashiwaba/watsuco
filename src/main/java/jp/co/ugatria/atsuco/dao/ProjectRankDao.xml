@@ -3,14 +3,27 @@
 <mapper namespace="jp.co.ugatria.atsuco.dao.ProjectRankDao">
 
 	<sql id="allColumns">
+		a.company_id as companyId,
+		a.project_id as projectId,
+		a.rank_no as rankNo,
+		a.rank_name as rankName,
+		a.point,
 		a.create_date as createDate,
-		a.create_user_id as createUserId,
+ 		a.create_user_id as createUserId,
 		a.update_date as updateDate,
 		a.update_user_id as updateUserId,
 		a.del_flg as delFlg
 	</sql>
 
-	<select id="findByPrimary" resultType="ProjectRank">
+	<select id="findByProjectId" resultType="ProjectRank">
+		select
+			<include refid="allColumns"/>
+		from
+			project_rank a
+		where
+			a.company_id = #{companyId} and
+			a.project_id = #{projectId} and
+			a.del_flg = '0'
 	</select>
 
 	<insert id="insert" parameterType="ProjectRank">
@@ -19,6 +32,11 @@
 		</selectKey>
 
 		insert into project_rank (
+			company_id,
+			project_id,
+			rank_no,
+			rank_name,
+			point,
 			create_date,
 			create_user_id,
 			update_date,
@@ -26,6 +44,11 @@
 			del_flg
 		)
 		values (
+			#{companyId},
+			#{projectId},
+			#{rankNo},
+			#{rankName},
+			#{point},
 			current_timestamp,
 			#{createUserId},
 			current_timestamp,
@@ -33,19 +56,5 @@
 			'0'
 		)
 	</insert>
-
-	<update id="update" parameterType="ProjectRank">
-		update project_rank
-		set
-			update_date = #{updateDate},
-			update_user_id = #{updateUserId}
-	</update>
-
-	<delete id="delete">
-		update project_rank
-		set
-			del_flg = '1'
-		where
-	</delete>
 
 </mapper>

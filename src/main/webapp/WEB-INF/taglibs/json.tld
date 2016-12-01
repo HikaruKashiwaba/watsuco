@@ -10,7 +10,7 @@
 
 	<function>
 		<name>encode</name>
-		<function-class>jp.co.ugatria.care.tag.JSON</function-class>
+		<function-class>jp.co.ugatria.base.tag.JSON</function-class>
 		<function-signature>
 			java.lang.String encode(java.lang.Object)
 		</function-signature>

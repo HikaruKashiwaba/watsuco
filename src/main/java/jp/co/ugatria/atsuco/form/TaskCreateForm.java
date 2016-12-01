@@ -1,8 +1,15 @@
 package jp.co.ugatria.atsuco.form;
 
 import javax.ws.rs.FormParam;
+import javax.xml.bind.annotation.XmlRootElement;
 
+import com.sun.xml.txw2.annotation.XmlAttribute;
+
+@XmlRootElement
 public class TaskCreateForm {
+
+	@FormParam("companyId")
+	private String companyId;
 
 	@FormParam("projectId")
 	private String projectId;
@@ -25,11 +32,33 @@ public class TaskCreateForm {
 	@FormParam("userId")
 	private String userId;
 
+	@FormParam("comment")
+	private String comment;
+
+	/**
+	 * companyIdを取得します.
+	 * @return String companyId
+	 */
+
+	public String getCompanyId() {
+		return companyId;
+	}
+
+	/**
+	 * companyId を設定します.
+	 * @param String companyId
+	 */
+
+	public void setCompanyId(String companyId) {
+		this.companyId = companyId;
+	}
+
 	/**
 	 * projectIdを取得します.
 	 * @return String projectId
 	 */
 
+	@XmlAttribute("projectId")
 	public String getProjectId() {
 		return projectId;
 	}
@@ -48,6 +77,7 @@ public class TaskCreateForm {
 	 * @return String title
 	 */
 
+	@XmlAttribute("title")
 	public String getTitle() {
 		return title;
 	}
@@ -66,6 +96,7 @@ public class TaskCreateForm {
 	 * @return String contents
 	 */
 
+	@XmlAttribute("contents")
 	public String getContents() {
 		return contents;
 	}
@@ -84,6 +115,7 @@ public class TaskCreateForm {
 	 * @return String startDeadlineDate
 	 */
 
+	@XmlAttribute("startDeadlineDate")
 	public String getStartDeadlineDate() {
 		return startDeadlineDate;
 	}
@@ -102,6 +134,7 @@ public class TaskCreateForm {
 	 * @return String endDeadlineDate
 	 */
 
+	@XmlAttribute("endDeadlineDate")
 	public String getEndDeadlineDate() {
 		return endDeadlineDate;
 	}
@@ -120,6 +153,7 @@ public class TaskCreateForm {
 	 * @return String rankNo
 	 */
 
+	@XmlAttribute("rankNo")
 	public String getRankNo() {
 		return rankNo;
 	}
@@ -138,6 +172,7 @@ public class TaskCreateForm {
 	 * @return String userId
 	 */
 
+	@XmlAttribute("userId")
 	public String getUserId() {
 		return userId;
 	}
@@ -149,5 +184,23 @@ public class TaskCreateForm {
 
 	public void setUserId(String userId) {
 		this.userId = userId;
+	}
+
+	/**
+	 * commentを取得します.
+	 * @return String comment
+	 */
+
+	public String getComment() {
+		return comment;
+	}
+
+	/**
+	 * comment を設定します.
+	 * @param String comment
+	 */
+
+	public void setComment(String comment) {
+		this.comment = comment;
 	}
 }

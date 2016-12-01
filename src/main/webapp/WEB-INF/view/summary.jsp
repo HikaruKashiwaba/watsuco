@@ -27,93 +27,97 @@
           <li><a href="${ctxp}/page/projects">プロジェクト</a></li>
           <li><a href="${ctxp}/page/users">担当者</a></li>
           <li><a href="${ctxp}/page/issues">課題管理</a></li>
+          <li><a href="${ctxp}/page/report">レポート</a></li>
         </ul>
       </div>
     </div>
   </header>
 
+  <c:forEach var="message" items="${msg:list(it.bean.messages, 'info')}" >
+    <div class="alert alert-info" role="alert"><c:out value="${message.message}" /></div>
+  </c:forEach>
+
+  <c:if test="${!empty it.bean.projects}">
   <div class="container no-pad">
     <div class="mb05">
-      <button type="button" class="btn btn-outline-primary" onclick="addTask();"><i class="glyphicon glyphicon-plus"></i> タスクを追加する</button>
-    </div>
-
-    <div id="not-asigned" class="col-lg-3 color-not-asigned mh-600 not-asigned">
-      <img id="100" src="${ctxp}/images/sticky-red.png" class="sticky" />
-      <img id="101" src="${ctxp}/images/sticky-blue.png" class="sticky" />
-      <img id="102" src="${ctxp}/images/sticky-green.png" class="sticky" />
-      <img id="103" src="${ctxp}/images/sticky-yellow.png" class="sticky" />
-      <img id="104" src="${ctxp}/images/sticky-red.png" class="sticky" />
-      <img id="105" src="${ctxp}/images/sticky-blue.png" class="sticky" />
-      <img id="106" src="${ctxp}/images/sticky-green.png" class="sticky" />
-      <img id="107" src="${ctxp}/images/sticky-yellow.png" class="sticky" />
-      <img id="108" src="${ctxp}/images/sticky-red.png" class="sticky" />
-      <img id="109" src="${ctxp}/images/sticky-blue.png" class="sticky" />
-      <img id="110" src="${ctxp}/images/sticky-green.png" class="sticky" />
-      <img id="111" src="${ctxp}/images/sticky-yellow.png" class="sticky" />
-    </div>
-    <div class="col-lg-9 no-pad mh-600">
-      <div id="user-1" class="col-lg-12 bb-gray no-pad" style="height:33%;">
-        <div id="not-start-1" class="col-lg-4 color-not-start h-100p not-start">
-          <img id="200" src="${ctxp}/images/sticky-red.png" class="sticky" />
-          <img id="201" src="${ctxp}/images/sticky-blue.png" class="sticky" />
-          <img id="202" src="${ctxp}/images/sticky-green.png" class="sticky" />
-          <img id="203" src="${ctxp}/images/sticky-yellow.png" class="sticky" />
-        </div>
-        <div class="col-lg-4 color-in-work h-100p in-work">
-          <img id="204" src="${ctxp}/images/sticky-red.png" class="sticky" />
-          <img id="205" src="${ctxp}/images/sticky-blue.png" class="sticky" />
-          <img id="206" src="${ctxp}/images/sticky-green.png" class="sticky" />
-          <img id="207" src="${ctxp}/images/sticky-yellow.png" class="sticky" />
-        </div>
-        <div class="col-lg-4 color-finish h-100p finish">
-          <img id="208" src="${ctxp}/images/sticky-red.png" class="sticky" />
-          <img id="209" src="${ctxp}/images/sticky-blue.png" class="sticky" />
-          <img id="210" src="${ctxp}/images/sticky-green.png" class="sticky" />
-          <img id="211" src="${ctxp}/images/sticky-yellow.png" class="sticky" />
-        </div>
+      <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+        <button type="button" class="btn btn-outline-primary" onclick="addTask();"><i class="glyphicon glyphicon-plus"></i> タスクを追加する</button>
       </div>
-      <div id="user-2" class="col-lg-12 bb-gray  no-pad" style="height:33%;">
-        <div id="not-start-2" class="col-lg-4 color-not-start h-100p not-start">
-          <img id="300" src="${ctxp}/images/sticky-red.png" class="sticky" />
-          <img id="301" src="${ctxp}/images/sticky-blue.png" class="sticky" />
-          <img id="302" src="${ctxp}/images/sticky-green.png" class="sticky" />
-          <img id="303" src="${ctxp}/images/sticky-yellow.png" class="sticky" />
-        </div>
-        <div class="col-lg-4 color-in-work h-100p in-work">
-          <img id="304" src="${ctxp}/images/sticky-red.png" class="sticky" />
-          <img id="305" src="${ctxp}/images/sticky-blue.png" class="sticky" />
-          <img id="306" src="${ctxp}/images/sticky-green.png" class="sticky" />
-          <img id="307" src="${ctxp}/images/sticky-yellow.png" class="sticky" />
-        </div>
-        <div class="col-lg-4 color-finish h-100p finish">
-          <img id="308" src="${ctxp}/images/sticky-red.png" class="sticky" />
-          <img id="309" src="${ctxp}/images/sticky-blue.png" class="sticky" />
-          <img id="310" src="${ctxp}/images/sticky-green.png" class="sticky" />
-          <img id="311" src="${ctxp}/images/sticky-yellow.png" class="sticky" />
-        </div>
-      </div>
-      <div id="user-3" class="col-lg-12 bb-gray  no-pad" style="height:34%;">
-        <div id="not-start-3" class="col-lg-4 color-not-start h-100p not-start">
-          <img id="400" src="${ctxp}/images/sticky-red.png" class="sticky" />
-          <img id="401" src="${ctxp}/images/sticky-blue.png" class="sticky" />
-          <img id="402" src="${ctxp}/images/sticky-green.png" class="sticky" />
-          <img id="403" src="${ctxp}/images/sticky-yellow.png" class="sticky" />
-        </div>
-        <div class="col-lg-4 color-in-work h-100p in-work">
-          <img id="404" src="${ctxp}/images/sticky-red.png" class="sticky" />
-          <img id="405" src="${ctxp}/images/sticky-blue.png" class="sticky" />
-          <img id="406" src="${ctxp}/images/sticky-green.png" class="sticky" />
-          <img id="407" src="${ctxp}/images/sticky-yellow.png" class="sticky" />
-        </div>
-        <div class="col-lg-4 color-finish h-100p finish">
-          <img id="408" src="${ctxp}/images/sticky-red.png" class="sticky" />
-          <img id="409" src="${ctxp}/images/sticky-blue.png" class="sticky" />
-          <img id="410" src="${ctxp}/images/sticky-green.png" class="sticky" />
-          <img id="411" src="${ctxp}/images/sticky-yellow.png" class="sticky" />
-        </div>
+      <div class="col-lg-offset-6 col-md-offset-6 col-sm-offset-6 col-xs-offset-6 col-lg-3 col-md-3 col-sm-3 col-xs-3 text-right">
+        <form name="form1" id="form1" action="${ctxp}/page/summary" class="form-horizontal" role="form" method="get">
+          <input type="hidden" id="companyIdSel" name="companyId" value="${it.bean.loginInfo.companyId}" />
+          <select id="projectIdSel" name="projectId" onchange="document.form1.submit();">
+            <c:forEach var="project" items="${it.bean.projects}" >
+              <option value="${project.projectId}" <c:if test="${project.projectId == it.bean.loginInfo.projectId}">selected="selected"</c:if>><c:out value="${project.projectName}" /></option>
+            </c:forEach>
+          </select>
+        </form>
       </div>
     </div>
   </div>
+
+  <div class="container no-pad">
+    <div id="not-asigned" class="col-lg-3 color-not-asigned mh-600 not-asigned">
+      <c:forEach var="task" items="${it.bean.tasks}">
+        <c:if test="${task.userId == null}">
+          <c:choose>
+            <c:when test="${task.rankNo == 1}"><img id="${task.taskId}" src="${ctxp}/images/sticky-red.png" class="sticky" title="<c:out value="${task.title}" />" /></c:when>
+            <c:when test="${task.rankNo == 2}"><img id="${task.taskId}" src="${ctxp}/images/sticky-yellow.png" class="sticky" title="<c:out value="${task.title}" />" /></c:when>
+            <c:when test="${task.rankNo == 3}"><img id="${task.taskId}" src="${ctxp}/images/sticky-blue.png" class="sticky" title="<c:out value="${task.title}" />" /></c:when>
+            <c:when test="${task.rankNo == 4}"><img id="${task.taskId}" src="${ctxp}/images/sticky-green.png" class="sticky" title="<c:out value="${task.title}" />" /></c:when>
+            <c:otherwise><img id="${task.taskId}" src="${ctxp}/images/sticky-green.png" class="sticky" title="<c:out value="${task.title}" />" /></c:otherwise>
+          </c:choose>
+        </c:if>
+      </c:forEach>
+    </div>
+    <div class="col-lg-9 no-pad mh-600">
+      <c:forEach var="user" items="${it.bean.users}">
+        <div id="user-${user.userId}" class="col-lg-12 bb-gray no-pad" style="height:28%;">
+          <div class="col-lg-1 h-100p"><c:out value="${user.userName}" /></div>
+          <div id="not-start-${user.userId}" class="col-lg-4 color-not-start h-100p not-start">
+            <c:forEach var="task" items="${it.bean.tasks}">
+              <c:if test="${task.userId == user.userId && task.status == '1'}">
+                <c:choose>
+                  <c:when test="${task.rankNo == 1}"><img id="${task.taskId}" src="${ctxp}/images/sticky-red.png" class="sticky" title="<c:out value="${task.title}" />" /></c:when>
+                  <c:when test="${task.rankNo == 2}"><img id="${task.taskId}" src="${ctxp}/images/sticky-yellow.png" class="sticky" title="<c:out value="${task.title}" />" /></c:when>
+                  <c:when test="${task.rankNo == 3}"><img id="${task.taskId}" src="${ctxp}/images/sticky-blue.png" class="sticky" title="<c:out value="${task.title}" />" /></c:when>
+                  <c:when test="${task.rankNo == 4}"><img id="${task.taskId}" src="${ctxp}/images/sticky-green.png" class="sticky" title="<c:out value="${task.title}" />" /></c:when>
+                  <c:otherwise><img id="${task.taskId}" src="${ctxp}/images/sticky-green.png" class="sticky" title="<c:out value="${task.title}" />" /></c:otherwise>
+                </c:choose>
+              </c:if>
+            </c:forEach>
+          </div>
+          <div id="in-work-${user.userId}" class="col-lg-3 color-in-work h-100p in-work">
+            <c:forEach var="task" items="${it.bean.tasks}">
+              <c:if test="${task.userId == user.userId && task.status == '2'}">
+                <c:choose>
+                  <c:when test="${task.rankNo == 1}"><img id="${task.taskId}" src="${ctxp}/images/sticky-red.png" class="sticky" title="<c:out value="${task.title}" />" /></c:when>
+                  <c:when test="${task.rankNo == 2}"><img id="${task.taskId}" src="${ctxp}/images/sticky-yellow.png" class="sticky" title="<c:out value="${task.title}" />" /></c:when>
+                  <c:when test="${task.rankNo == 3}"><img id="${task.taskId}" src="${ctxp}/images/sticky-blue.png" class="sticky" title="<c:out value="${task.title}" />" /></c:when>
+                  <c:when test="${task.rankNo == 4}"><img id="${task.taskId}" src="${ctxp}/images/sticky-green.png" class="sticky" title="<c:out value="${task.title}" />" /></c:when>
+                  <c:otherwise><img id="${task.taskId}" src="${ctxp}/images/sticky-green.png" class="sticky" title="<c:out value="${task.title}" />" /></c:otherwise>
+                </c:choose>
+              </c:if>
+            </c:forEach>
+          </div>
+          <div id="finish-${user.userId}" class="col-lg-4 color-finish h-100p finish">
+            <c:forEach var="task" items="${it.bean.tasks}">
+              <c:if test="${task.userId == user.userId && task.status == '3'}">
+                <c:choose>
+                  <c:when test="${task.rankNo == 1}"><img id="${task.taskId}" src="${ctxp}/images/sticky-red.png" class="sticky" title="<c:out value="${task.title}" />" /></c:when>
+                  <c:when test="${task.rankNo == 2}"><img id="${task.taskId}" src="${ctxp}/images/sticky-yellow.png" class="sticky" title="<c:out value="${task.title}" />" /></c:when>
+                  <c:when test="${task.rankNo == 3}"><img id="${task.taskId}" src="${ctxp}/images/sticky-blue.png" class="sticky" title="<c:out value="${task.title}" />" /></c:when>
+                  <c:when test="${task.rankNo == 4}"><img id="${task.taskId}" src="${ctxp}/images/sticky-green.png" class="sticky" title="<c:out value="${task.title}" />" /></c:when>
+                  <c:otherwise><img id="${task.taskId}" src="${ctxp}/images/sticky-green.png" class="sticky" title="<c:out value="${task.title}" />" /></c:otherwise>
+                </c:choose>
+              </c:if>
+            </c:forEach>
+          </div>
+        </div>
+      </c:forEach>
+    </div>
+  </div>
+  </c:if>
 
   <div id="log-character" class="bottom-fixed w-100p" style="display:none;">
     <div class="col-sm-offset-9 col-sm-2" style="position:relative;">
